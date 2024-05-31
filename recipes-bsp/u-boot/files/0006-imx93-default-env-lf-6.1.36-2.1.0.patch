@@ -59,9 +59,9 @@ index b0ae6638ca..7bf8a38351 100644
 +	"altbootdual=if test ${bootslot} = dualA ; then run altbootRollbackB; fi; if test ${bootslot} = dualB ; then run altbootRollbackA; fi;\0" \
 +	"swuargs=setenv bootargs console=${console},${baudrate} earlycon=${earlycon},${baudrate} " \
 +        "cur_slot=${bootslot} U-Boot_ver=${u-boot_version}\0"\
-+	"loadswuimage=mmc read  ${loadaddr} 0x4000 0xF000\0" \
-+	"loadswufdt=mmc read  ${fdt_addr} 0x13000 0x200\0" \
-+	"loadswuramdisk=mmc read  ${initrd_addr} 0x15000 0x15000\0" \
++	"loadswuimage=mmc read  ${loadaddr} 0x4000 0x15000\0" \
++	"loadswufdt=mmc read  ${fdt_addr} 0x19000 0x200\0" \
++	"loadswuramdisk=mmc read  ${initrd_addr} 0x1B000 0x21000\0" \
 +        "swuboot=echo swuboot ramdisk;run loadswuimage;run loadswufdt;run loadswuramdisk;run swuargs;booti ${loadaddr} ${initrd_addr} ${fdt_addr}\0" \
 +        "altbootcmd=if test ${bootslot} = singlerescue ||  test ${bootslot} = singlenormal; then run altbootsingle; fi;" \
 +	"if test ${bootslot} = dualA ||  test ${bootslot} = dualB; then run altbootdual; fi\0" \
