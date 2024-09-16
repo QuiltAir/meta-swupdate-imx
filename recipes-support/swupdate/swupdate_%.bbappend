@@ -4,7 +4,7 @@ FILES:${PN} += "/www/*"
 
 SRC_URI += "file://swupdate-sysrestart.service \
 	file://swupdate.cfg \
-	file://swu_public.pem \
+	file://swu_public_release.pem \
 	file://swu_public_dev.pem \
 	file://0001-mongoose-enable-cgi.patch \
 	file://sysinfo.cgi  \
@@ -20,8 +20,8 @@ SYSTEMD_SERVICE:${PN} += "swupdate-sysrestart.service"
 
 do_install:append () {
 	install -m 644 ${WORKDIR}/swupdate.cfg ${D}/${sysconfdir}
-	if ${@bb.utils.contains('DISTRO', 'quilt-qsm-release quilt-donut-release', 'true', 'false', d)}; then
-		install -m 644 ${WORKDIR}/swu_public.pem ${D}/${sysconfdir}/swu_public.pem
+	if ${@bb.utils.contains_any('DISTRO', ['quilt-qsm-release', 'quilt-donut-release'], 'true', 'false', d)}; then
+		install -m 644 ${WORKDIR}/swu_public_release.pem ${D}/${sysconfdir}/swu_public.pem
 	else
 		install -m 644 ${WORKDIR}/swu_public_dev.pem ${D}/${sysconfdir}/swu_public.pem
 	fi
